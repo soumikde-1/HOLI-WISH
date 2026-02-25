@@ -31,7 +31,6 @@
             align-items: center;
         }
 
-        /* Full Screen Canvas for Abir Animations */
         #abir-canvas {
             position: fixed;
             top: 0;
@@ -42,7 +41,6 @@
             pointer-events: none;
         }
 
-        /* Glassmorphism Container */
         .container {
             position: relative;
             z-index: 10;
@@ -106,12 +104,6 @@
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .btn-magic:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 25px rgba(255, 170, 0, 0.6);
-        }
-
-        /* Main Greeting Screen */
         #main-screen {
             display: none;
             flex-direction: column;
@@ -133,7 +125,6 @@
             animation: colorFlow 5s infinite linear;
         }
 
-        /* Bengali Poem Style */
         .bengali-poem {
             font-family: 'Galada', cursive;
             font-size: 1.8rem;
@@ -153,7 +144,6 @@
             font-size: 1.5rem;
         }
 
-        /* Formal English Wish Style */
         .formal-text {
             font-size: 1.1rem;
             font-weight: 300;
@@ -163,7 +153,6 @@
             padding: 0 15px;
         }
 
-        /* Video Container Fixed */
         .video-container {
             width: 100%;
             max-width: 650px;
@@ -172,12 +161,12 @@
             border: 3px solid rgba(255,255,255,0.2);
             box-shadow: 0 10px 30px rgba(0,0,0,0.6);
             margin-bottom: 30px;
-            background-color: #000; /* Black background block incase it takes time to load */
+            background-color: #000; 
         }
 
         video {
             width: 100%;
-            height: auto; /* Ensures video scales properly without hiding */
+            height: auto; 
             display: block;
         }
 
@@ -228,11 +217,11 @@
 
         <p class="formal-text" id="english-wish-container"></p>
 
-     <div class="video-container">
-    <video id="holiVideo" controls playsinline loop style="width: 100%; height: auto; border-radius: 20px;">
-        <source src="https://res.cloudinary.com/dcr3u9smd/video/upload/vc_h264/v1772022128/tg_j1tawt.mp4" type="video/mp4">
+        <div class="video-container">
+            <video id="holiVideo" controls playsinline loop style="width: 100%; height: auto; border-radius: 20px;">
+                <source src="holi.mp4" type="video/mp4">
             </video>
-</div>
+        </div>
 
         <div class="footer-credit">
             Created by <span>Soumik De</span>
@@ -240,7 +229,6 @@
     </div>
 
     <script>
-        // Array of 10 Aesthetic Bengali Poems
         const poemsArray = [
             "বসন্তের ছোঁয়ায় রঙিন হোক তোমার মন,<br> <span class='bengali-name'>{name}</span>-তোমার জীবনে আসুক খুশির প্লাবন।",
             "ফাগুনের রঙে রাঙা হোক তোমার আকাশ,<br> <span class='bengali-name'>{name}</span>-তোমার মুখে ফুটুক মিষ্টি হাসির বাতাস।",
@@ -254,7 +242,6 @@
             "হোলির এই পবিত্র রঙে রাঙাও তোমার হিয়া,<br> <span class='bengali-name'>{name}</span>-তোমাকে জানাই বসন্তের এই মিষ্টি শুভেচ্ছা।"
         ];
 
-        // Array of 10 Formal English Wishes
         const englishWishesArray = [
             "Wishing you and your esteemed family a joyous and prosperous Festival of Colors.",
             "May the vibrant hues of Holi bring abundant success, peace, and harmony to your life.",
@@ -277,28 +264,22 @@
 
             document.getElementById('display-name').innerText = name;
             
-            // Set random poem
             let randomPoemIndex = Math.floor(Math.random() * poemsArray.length);
             document.getElementById('poem-container').innerHTML = poemsArray[randomPoemIndex].replace(/{name}/g, name);
             
-            // Set random English wish
             let randomEnglishIndex = Math.floor(Math.random() * englishWishesArray.length);
             document.getElementById('english-wish-container').innerText = englishWishesArray[randomEnglishIndex];
 
-            // Show main screen
             document.getElementById('intro-screen').style.display = 'none';
             document.getElementById('main-screen').style.display = 'flex';
 
-            // Play video after interaction
             let videoElement = document.getElementById('holiVideo');
             videoElement.play().catch(e => console.log("Waiting for manual play interaction."));
 
-            // Start explosion animation
             animationMode = 'burst';
             createExplosion();
         }
 
-        // --- CANVAS ANIMATION LOGIC ---
         const canvas = document.getElementById('abir-canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
