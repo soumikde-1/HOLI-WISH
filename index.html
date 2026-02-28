@@ -25,7 +25,7 @@
             background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             color: #ffffff;
             height: 100vh;
-            height: 100dvh; /* Better for mobile browsers */
+            height: 100dvh; 
             overflow: hidden;
             display: flex;
             justify-content: center;
@@ -53,7 +53,7 @@
             color: #ffaa00;
             font-weight: 600;
             font-family: 'Dancing Script', cursive;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             letter-spacing: 1px;
         }
 
@@ -79,12 +79,11 @@
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
             text-align: center;
             width: 92%;
-            max-width: 420px; /* Perfect for mobile ratio */
+            max-width: 420px; 
             transition: transform 0.2s ease-out, opacity 0.6s ease-in-out;
             transform-style: preserve-3d;
         }
 
-        /* Laptop Adjustments */
         @media (min-width: 768px) {
             .container {
                 max-width: 550px;
@@ -92,7 +91,7 @@
                 border-radius: 30px;
             }
             .top-credit { top: 20px; font-size: 0.9rem; }
-            .top-credit span { font-size: 1.4rem; }
+            .top-credit span { font-size: 1.5rem; }
         }
 
         @keyframes popIn {
@@ -135,7 +134,7 @@
         }
 
         .btn-magic {
-            padding: 12px 30px;
+            padding: 14px 30px;
             background: linear-gradient(45deg, #ff007f, #ffaa00);
             border: none;
             border-radius: 50px;
@@ -144,20 +143,20 @@
             font-weight: 600;
             font-family: 'Poppins', sans-serif;
             cursor: pointer;
-            box-shadow: 0 10px 20px rgba(255, 0, 127, 0.4);
+            box-shadow: 0 8px 15px rgba(255, 0, 127, 0.3);
             transition: transform 0.3s, box-shadow 0.3s;
-            width: 100%; /* Full width for mobile tap targets */
-            margin-bottom: 10px;
+            width: 100%; 
+            margin-bottom: 12px;
         }
 
         .btn-magic:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 15px 25px rgba(255, 170, 0, 0.5);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 12px 20px rgba(255, 170, 0, 0.4);
         }
 
         .btn-share {
             background: linear-gradient(45deg, #25D366, #128C7E);
-            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 8px 15px rgba(37, 211, 102, 0.3);
         }
 
         #main-screen {
@@ -169,55 +168,58 @@
             overflow-y: auto;
             animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             margin-top: 25px;
+            padding-bottom: 20px; /* Extra padding so last button isn't cut off */
         }
 
         #main-screen::-webkit-scrollbar { width: 4px; }
         #main-screen::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 10px; }
 
         .wish-title {
-            font-size: 3rem;
-            margin-bottom: 5px;
+            font-size: 2.8rem;
+            margin-bottom: 10px;
             background: linear-gradient(to right, #ff007f, #00f2fe, #4facfe, #ffaa00);
             -webkit-background-clip: text;
             color: transparent;
             animation: colorFlow 5s infinite linear;
-            line-height: 1.1;
+            line-height: 1.3;
         }
 
         .bengali-poem {
             font-family: 'Galada', cursive;
-            font-size: 1.4rem;
-            line-height: 1.5;
+            font-size: 1.3rem; /* Slightly adjusted to fit perfectly */
+            line-height: 1.8; /* Increased line gap to prevent overlap */
             color: #f1f1f1;
             margin: 15px 0;
-            padding: 12px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            padding: 15px 10px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
             border-radius: 15px;
-            text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
-            min-height: 90px; 
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+            width: 100%;
         }
 
         .bengali-name {
             color: #ffaa00;
             font-family: 'Poppins', sans-serif;
             font-weight: 600;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
+            display: inline-block; /* Helps prevent breaking weirdly */
         }
 
         .stylish-english {
             font-family: 'Dancing Script', cursive;
-            font-size: 1.6rem;
+            font-size: 1.7rem;
             color: #ffde00;
-            margin-bottom: 20px;
-            line-height: 1.4;
-            padding: 0 10px;
+            margin: 10px 0 25px 0;
+            line-height: 1.8; /* Increased gap for English font */
+            padding: 0 5px;
             text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
-            min-height: 70px;
+            width: 100%;
         }
 
         .stylish-english span {
             opacity: 0;
             display: inline-block;
+            margin-bottom: 5px; /* Extra spacing to prevent vertical overlap */
             transform: translateY(10px);
             animation: fadeUp 0.5s ease forwards;
         }
@@ -227,12 +229,12 @@
         }
 
         #holi-image {
-            width: 85%;
+            width: 90%;
             max-width: 250px;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-            margin-bottom: 20px;
-            border: 3px solid rgba(255,255,255,0.2);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            margin-bottom: 25px;
+            border: 2px solid rgba(255,255,255,0.2);
             display: none; 
             opacity: 0;
             transform: scale(0.5);
@@ -246,10 +248,10 @@
 
         .button-group {
             display: flex;
-            flex-direction: column; /* Stacked for mobile */
-            gap: 10px;
+            flex-direction: column; 
+            gap: 5px;
             width: 100%;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         @keyframes colorFlow {
@@ -257,12 +259,13 @@
             100% { filter: hue-rotate(360deg); }
         }
 
-        /* Adjustments for extremely small phones (like iPhone SE) */
+        /* Adjustments for extra small screens */
         @media (max-width: 360px) {
-            .wish-title { font-size: 2.5rem; }
-            .bengali-poem { font-size: 1.2rem; }
-            .stylish-english { font-size: 1.4rem; }
+            .wish-title { font-size: 2.3rem; }
+            .bengali-poem { font-size: 1.15rem; line-height: 1.7; }
+            .stylish-english { font-size: 1.45rem; line-height: 1.7; }
             .container { padding: 25px 15px; }
+            .btn-magic { font-size: 1rem; padding: 12px 20px; }
         }
     </style>
 </head>
@@ -380,6 +383,7 @@
             let words = text.split(" ");
             words.forEach((word, index) => {
                 let span = document.createElement("span");
+                // Using non-breaking space inside the span to prevent weird breaks
                 span.innerHTML = word + "&nbsp;";
                 span.style.animationDelay = `${index * 0.15}s`; 
                 container.appendChild(span);
@@ -391,7 +395,6 @@
             }
         }
 
-        // Reduced Tilt effect for mobile to prevent jitter
         if (window.DeviceOrientationEvent) {
             window.addEventListener("deviceorientation", function(event) {
                 let x = event.gamma; 
