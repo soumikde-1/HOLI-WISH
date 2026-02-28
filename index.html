@@ -271,10 +271,6 @@
 </head>
 <body>
 
-    <audio id="bgMusic" loop preload="auto">
-        <source src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" type="audio/mpeg">
-    </audio>
-
     <div class="top-credit">
         This Page is Made By- <span>Soumik De</span>
     </div>
@@ -304,13 +300,264 @@
     </div>
 
     <script>
-        // ==== 100% WORKING SMART AUDIO PLAY ====
-        const bgMusic = document.getElementById('bgMusic');
-        bgMusic.volume = 0.3; // Very soft and relaxing volume
+        const poemsArray = [
+            "ফাগুনের ছোঁয়ায় প্রকৃতি আজ সেজেছে নতুন সাজে,<br> <span class='bengali-name'>{name}</span>-তোমার মনের আনাচে কানাচে যেন হোলির রঙ বাজে।",
+            "পলাশ আর শিমুলের ডালে রঙের যে উৎসব,<br> <span class='bengali-name'>{name}</span>-তোমার জীবন ভরিয়ে দিক খুশির কলরব।",
+            "নীল আকাশে আবির উড়ে ছড়ায় রঙের খেলা,<br> <span class='bengali-name'>{name}</span>-বসন্তের এই হাওয়ায় কাটুক তোমার সারা বেলা।",
+            "প্রকৃতি আজ মেতেছে যে রঙের এক প্লাবনে,<br> <span class='bengali-name'>{name}</span>-তোমার মন রাঙুক আজ বসন্তেরই আগমনে।",
+            "গাছে গাছে কচি পাতা আর কোকিলের ওই গান,<br> <span class='bengali-name'>{name}</span>-হোলির রঙে রঙিন হোক তোমার পবিত্র প্রাণ।",
+            "রাঙা আবির মেখে আজ রাঙিয়ে দেবো ধরণী,<br> <span class='bengali-name'>{name}</span>-রঙের ভেলায় ভাসুক তোমার আগামী দিনের তরণী।",
+            "আকাশে ওড়ে সাতটি রঙ মাটির বুকে মেলা,<br> <span class='bengali-name'>{name}</span>-আনন্দে ভরে উঠুক তোমার হোলির এই খেলা।",
+            "ফাল্গুনের এই মাতাল হাওয়ায় দোল লেগেছে মনে,<br> <span class='bengali-name'>{name}</span>-শুভেচ্ছা জানাই তোমায় এই রঙিন ক্ষণে।"
+        ];
 
-        function playMusic() {
-            if (bgMusic.paused) {
-                let promise = bgMusic.play();
-                if (promise !== undefined) {
-                    promise.then(_ => {
-                        // Success! Remove listeners so it doesn't
+        const englishWishesArray = [
+            "Wishing you and your family a joyous and prosperous Festival of Colors.",
+            "May the vibrant hues of Holi bring abundant success, peace, and harmony to your life.",
+            "Sending you my warmest regards. Have a wonderful and safe Holi.",
+            "May the colors of Holi paint the canvas of your life with laughter, happiness, and prosperity.",
+            "Let the colors of Holi sprinkle joy and bring new colors to your world.",
+            "Wishing you a Holi filled with sweet moments and colorful memories to cherish forever.",
+            "May this festival of colors dissolve all barriers and bring you endless moments of happiness.",
+            "May your life be as bright and colorful as the beautiful festival of Holi."
+        ];
+
+        function startMagic() {
+            let name = document.getElementById('userName').value;
+            if (name.trim() === "") {
+                alert("Please write your name here cutie! 🥰");
+                return;
+            }
+
+            document.getElementById('display-name').innerText = name;
+            
+            document.getElementById('intro-screen').style.display = 'none';
+            document.getElementById('main-screen').style.display = 'flex';
+
+            animationMode = 'burst';
+            createExplosion();
+
+            let randomPoem = poemsArray[Math.floor(Math.random() * poemsArray.length)].replace(/{name}/g, name);
+            typeWriterHTML(document.getElementById('poem-container'), randomPoem, 50, function() {
+                
+                let randomEnglish = englishWishesArray[Math.floor(Math.random() * englishWishesArray.length)];
+                animateEnglishText('english-wish-container', randomEnglish, function() {
+                    
+                    setTimeout(() => {
+                        let img = document.getElementById('holi-image');
+                        img.style.display = 'block'; 
+                        setTimeout(() => {
+                            img.classList.add('show'); 
+                        }, 50); 
+                    }, 500); 
+                });
+            });
+        }
+
+        function typeWriterHTML(element, htmlString, speed, callback) {
+            element.innerHTML = "";
+            let i = 0;
+            let isTag = false;
+            let text = "";
+            function type() {
+                if (i < htmlString.length) {
+                    let char = htmlString.charAt(i);
+                    text += char;
+                    element.innerHTML = text;
+                    if (char === '<') isTag = true;
+                    if (char === '>') isTag = false;
+                    i++;
+                    if (isTag) {
+                        type(); 
+                    } else {
+                        setTimeout(type, speed);
+                    }
+                } else if (callback) {
+                    setTimeout(callback, 500); 
+                }
+            }
+            type();
+        }
+
+        function animateEnglishText(elementId, text, callback) {
+            let container = document.getElementById(elementId);
+            container.innerHTML = "";
+            let words = text.split(" ");
+            words.forEach((word, index) => {
+                let span = document.createElement("span");
+                span.innerHTML = word + "&nbsp;";
+                span.style.animationDelay = `${index * 0.15}s`; 
+                container.appendChild(span);
+            });
+
+            if(callback) {
+                let totalTime = (words.length * 0.15 + 0.5) * 1000;
+                setTimeout(callback, totalTime);
+            }
+        }
+
+        if (window.DeviceOrientationEvent) {
+            window.addEventListener("deviceorientation", function(event) {
+                let x = event.gamma; 
+                let y = event.beta;  
+
+                if (x === null || y === null) return; 
+
+                if (x > 20) x = 20; if (x < -20) x = -20;
+                if (y > 20) y = 20; if (y < -20) y = -20;
+
+                document.querySelectorAll('.container').forEach(card => {
+                    if(card.style.display !== 'none') {
+                        card.style.transform = `rotateY(${x / 2}deg) rotateX(${-y / 2}deg)`;
+                    }
+                });
+            });
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            document.querySelectorAll('.container').forEach(card => {
+                if(card.style.display !== 'none') {
+                    let xAxis = (window.innerWidth / 2 - e.pageX) / 40;
+                    let yAxis = (window.innerHeight / 2 - e.pageY) / 40;
+                    card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+                }
+            });
+        });
+
+        function shareWish() {
+            let name = document.getElementById('userName').value;
+            let currentUrl = window.location.href; 
+            let text = `🎨 Happy Holi! 🎨\nDekho ${name} tomar jonno ki pathiyeche ekhane click kore:\n${currentUrl}`;
+            let whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        const canvas = document.getElementById('abir-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const colors = ['#ff007f', '#ffaa00', '#00f2fe', '#4facfe', '#cc00ff', '#00ffcc', '#ff3333', '#33ff33'];
+        let particles = [];
+        let animationMode = 'floating';
+
+        class Particle {
+            constructor(x, y, mode) {
+                this.x = x;
+                this.y = y;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.size = Math.random() * 8 + 2;
+                this.mode = mode;
+
+                if (mode === 'floating') {
+                    this.speedX = (Math.random() - 0.5) * 2;
+                    this.speedY = (Math.random() - 0.5) * 2;
+                    this.life = 1;
+                    this.decay = 0; 
+                } else if (mode === 'burst' || mode === 'clickBurst') {
+                    const angle = Math.random() * Math.PI * 2;
+                    const velocity = Math.random() * (mode === 'clickBurst' ? 8 : 15) + 3;
+                    this.speedX = Math.cos(angle) * velocity;
+                    this.speedY = Math.sin(angle) * velocity;
+                    this.gravity = 0.15;
+                    this.life = 1;
+                    this.decay = Math.random() * 0.02 + 0.015;
+                } else if (mode === 'raining') {
+                    this.speedX = (Math.random() - 0.5) * 3;
+                    this.speedY = Math.random() * 5 + 2;
+                    this.life = 1;
+                    this.decay = 0;
+                }
+            }
+
+            update() {
+                if (this.mode === 'burst' || this.mode === 'clickBurst') {
+                    this.speedY += this.gravity;
+                    this.life -= this.decay;
+                }
+                
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.mode === 'floating' || this.mode === 'raining') {
+                    if (this.x < 0) this.x = canvas.width;
+                    if (this.x > canvas.width) this.x = 0;
+                    if (this.y < 0) this.y = canvas.height;
+                    if (this.y > canvas.height) this.y = 0;
+                }
+            }
+
+            draw() {
+                ctx.globalAlpha = Math.max(0, this.life);
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.globalAlpha = 1;
+            }
+        }
+
+        function initFloating() {
+            for (let i = 0; i < 150; i++) {
+                particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height, 'floating'));
+            }
+        }
+
+        function createExplosion() {
+            let centerX = canvas.width / 2;
+            let centerY = canvas.height / 2;
+            
+            for (let i = 0; i < 200; i++) {
+                particles.push(new Particle(centerX, centerY, 'burst'));
+            }
+
+            setTimeout(() => {
+                animationMode = 'raining';
+                particles = particles.filter(p => p.mode !== 'floating');
+                if(particles.filter(p => p.mode === 'raining').length < 100) {
+                    for (let i = 0; i < 100; i++) {
+                        particles.push(new Particle(Math.random() * canvas.width, -10, 'raining'));
+                    }
+                }
+            }, 1500);
+        }
+
+        canvas.addEventListener('click', (e) => {
+            for (let i = 0; i < 30; i++) {
+                particles.push(new Particle(e.clientX, e.clientY, 'clickBurst'));
+            }
+        });
+
+        document.body.addEventListener('click', (e) => {
+            if(e.target.tagName !== 'BUTTON' && e.target.tagName !== 'INPUT' && e.target.tagName !== 'IMG') {
+                for (let i = 0; i < 30; i++) {
+                    particles.push(new Particle(e.clientX, e.clientY, 'clickBurst'));
+                }
+            }
+        });
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                if (particles[i].life <= 0) {
+                    particles.splice(i, 1);
+                    i--;
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        initFloating();
+        animate();
+    </script>
+</body>
+</html>
