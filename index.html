@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Aesthetic Holi Wishes</title>
+    <title>Soulful Holi Wishes | Soumik De</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Galada&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -168,7 +168,7 @@
             overflow-y: auto;
             animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             margin-top: 25px;
-            padding-bottom: 20px; /* Extra padding so last button isn't cut off */
+            padding-bottom: 30px; /* Space for image and buttons */
         }
 
         #main-screen::-webkit-scrollbar { width: 4px; }
@@ -186,8 +186,8 @@
 
         .bengali-poem {
             font-family: 'Galada', cursive;
-            font-size: 1.3rem; /* Slightly adjusted to fit perfectly */
-            line-height: 1.8; /* Increased line gap to prevent overlap */
+            font-size: 1.3rem; 
+            line-height: 1.9; /* Gap to prevent overlap */
             color: #f1f1f1;
             margin: 15px 0;
             padding: 15px 10px;
@@ -202,15 +202,15 @@
             font-family: 'Poppins', sans-serif;
             font-weight: 600;
             font-size: 1.2rem;
-            display: inline-block; /* Helps prevent breaking weirdly */
+            display: inline-block; 
         }
 
         .stylish-english {
             font-family: 'Dancing Script', cursive;
             font-size: 1.7rem;
             color: #ffde00;
-            margin: 10px 0 25px 0;
-            line-height: 1.8; /* Increased gap for English font */
+            margin: 10px 0 20px 0;
+            line-height: 1.8; /* Gap for English font */
             padding: 0 5px;
             text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
             width: 100%;
@@ -219,7 +219,7 @@
         .stylish-english span {
             opacity: 0;
             display: inline-block;
-            margin-bottom: 5px; /* Extra spacing to prevent vertical overlap */
+            margin-bottom: 5px; /* Vertical spacing */
             transform: translateY(10px);
             animation: fadeUp 0.5s ease forwards;
         }
@@ -228,12 +228,14 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Image Position Adjusted further down */
         #holi-image {
             width: 90%;
             max-width: 250px;
             border-radius: 15px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            margin-bottom: 25px;
+            margin-top: 20px; /* Extra space from text */
+            margin-bottom: 30px; /* Space for buttons below */
             border: 2px solid rgba(255,255,255,0.2);
             display: none; 
             opacity: 0;
@@ -259,20 +261,20 @@
             100% { filter: hue-rotate(360deg); }
         }
 
-        /* Adjustments for extra small screens */
+        /* Small screen optimization */
         @media (max-width: 360px) {
             .wish-title { font-size: 2.3rem; }
-            .bengali-poem { font-size: 1.15rem; line-height: 1.7; }
+            .bengali-poem { font-size: 1.1rem; line-height: 1.8; }
             .stylish-english { font-size: 1.45rem; line-height: 1.7; }
             .container { padding: 25px 15px; }
-            .btn-magic { font-size: 1rem; padding: 12px 20px; }
+            #main-screen { max-height: 80vh; }
         }
     </style>
 </head>
 <body>
 
     <audio id="bgMusic" loop>
-        <source src="https://cdn.pixabay.com/download/audio/2022/02/22/audio_d1718ab41b.mp3" type="audio/mpeg">
+        <source src="https://cdn.pixabay.com/download/audio/2024/09/16/audio_2456ac4e24.mp3" type="audio/mpeg">
     </audio>
 
     <div class="top-credit">
@@ -304,16 +306,27 @@
     </div>
 
     <script>
+        // Aro 8-ta notun Bengali Wishes ✍️
         const poemsArray = [
             "বসন্তের ছোঁয়ায় রঙিন হোক তোমার মন,<br> <span class='bengali-name'>{name}</span>-তোমার জীবনে আসুক খুশির প্লাবন।",
             "ফাগুনের রঙে রাঙা হোক তোমার আকাশ,<br> <span class='bengali-name'>{name}</span>-তোমার মুখে ফুটুক মিষ্টি হাসির বাতাস।",
-            "আবিরের ছোঁয়ায় কাটুক সব বিষাদ,<br> <span class='bengali-name'>{name}</span>-তোমার জীবনে আসুক নতুন এক প্রভাত।"
+            "আবিরের ছোঁয়ায় কাটুক সব বিষাদ,<br> <span class='bengali-name'>{name}</span>-তোমার জীবনে আসুক নতুন এক প্রভাত।",
+            "রঙিন সব আবিরেতে মাখাবো আজ তোমায়,<br> <span class='bengali-name'>{name}</span>-সুখ আর শান্তিতে ভরে উঠুক তোমার ধরায়।",
+            "পলাশ ফুলা ফাগুনে আজ লাগলো যে দোল,<br> <span class='bengali-name'>{name}</span>-রঙের বন্যায় ভাসিয়ে দাও সব গণ্ডগোল।",
+            "রামধনুর রঙের মতো রঙিন তোমার হাসি,<br> <span class='bengali-name'>{name}</span>-আনন্দে কাটুক তোমার দিন, জানাই রাশি রাশি।",
+            "হোলির রঙের এই মেলাতে মিশে যাক সব ব্যবধান,<br> <span class='bengali-name'>{name}</span>-তোমার প্রতিটি দিন হোক আলোয় আলোকময়।"
         ];
 
+        // Aro 8-ta notun English Wishes (Stylish Font) 📜
         const englishWishesArray = [
             "Wishing you and your family a joyous and prosperous Festival of Colors.",
             "May the vibrant hues of Holi bring abundant success, peace, and harmony to your life.",
-            "Sending you my warmest regards. Have a wonderful and safe Holi."
+            "Sending you my warmest regards. Have a wonderful and safe Holi.",
+            "May the colors of Holi paint the canvas of your life with laughter, happiness, and prosperity.",
+            "Let the colors of Holi sprinkle joy and bring new colors to your world.",
+            "Wishing you a Holi filled with sweet moments and colorful memories to cherish forever.",
+            "May this festival of colors dissolve all barriers and bring you endless moments of happiness.",
+            "May your life be as bright and colorful as the beautiful festival of Holi."
         ];
 
         function startMagic() {
@@ -323,6 +336,7 @@
                 return;
             }
 
+            // Play background music (Violin & Saxophone)
             let bgMusic = document.getElementById('bgMusic');
             bgMusic.volume = 0.5; 
             bgMusic.play().catch(e => console.log("Audio autoplay prevented by browser."));
@@ -347,7 +361,7 @@
                         setTimeout(() => {
                             img.classList.add('show'); 
                         }, 50); 
-                    }, 400); 
+                    }, 500); // Small pause before image appears
                 });
             });
         }
@@ -383,7 +397,6 @@
             let words = text.split(" ");
             words.forEach((word, index) => {
                 let span = document.createElement("span");
-                // Using non-breaking space inside the span to prevent weird breaks
                 span.innerHTML = word + "&nbsp;";
                 span.style.animationDelay = `${index * 0.15}s`; 
                 container.appendChild(span);
@@ -395,6 +408,7 @@
             }
         }
 
+        // Mobile Sensor for Tilt
         if (window.DeviceOrientationEvent) {
             window.addEventListener("deviceorientation", function(event) {
                 let x = event.gamma; 
@@ -431,6 +445,7 @@
             window.open(whatsappUrl, '_blank');
         }
 
+        // --- PARTICLE SYSTEM ---
         const canvas = document.getElementById('abir-canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
