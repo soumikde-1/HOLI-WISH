@@ -168,7 +168,7 @@
             overflow-y: auto;
             animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             margin-top: 25px;
-            padding-bottom: 30px; /* Space for image and buttons */
+            padding-bottom: 30px; 
         }
 
         #main-screen::-webkit-scrollbar { width: 4px; }
@@ -187,7 +187,7 @@
         .bengali-poem {
             font-family: 'Galada', cursive;
             font-size: 1.3rem; 
-            line-height: 1.9; /* Gap to prevent overlap */
+            line-height: 1.9; 
             color: #f1f1f1;
             margin: 15px 0;
             padding: 15px 10px;
@@ -210,7 +210,7 @@
             font-size: 1.7rem;
             color: #ffde00;
             margin: 10px 0 20px 0;
-            line-height: 1.8; /* Gap for English font */
+            line-height: 1.8; 
             padding: 0 5px;
             text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
             width: 100%;
@@ -219,7 +219,7 @@
         .stylish-english span {
             opacity: 0;
             display: inline-block;
-            margin-bottom: 5px; /* Vertical spacing */
+            margin-bottom: 5px; 
             transform: translateY(10px);
             animation: fadeUp 0.5s ease forwards;
         }
@@ -228,14 +228,13 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Image Position Adjusted further down */
         #holi-image {
             width: 90%;
             max-width: 250px;
             border-radius: 15px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            margin-top: 20px; /* Extra space from text */
-            margin-bottom: 30px; /* Space for buttons below */
+            margin-top: 20px; 
+            margin-bottom: 30px; 
             border: 2px solid rgba(255,255,255,0.2);
             display: none; 
             opacity: 0;
@@ -261,7 +260,6 @@
             100% { filter: hue-rotate(360deg); }
         }
 
-        /* Small screen optimization */
         @media (max-width: 360px) {
             .wish-title { font-size: 2.3rem; }
             .bengali-poem { font-size: 1.1rem; line-height: 1.8; }
@@ -273,8 +271,8 @@
 </head>
 <body>
 
-    <audio id="bgMusic" loop>
-        <source src="https://cdn.pixabay.com/download/audio/2024/09/16/audio_2456ac4e24.mp3" type="audio/mpeg">
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://assets.mixkit.co/music/preview/mixkit-serene-view-443.mp3" type="audio/mpeg">
     </audio>
 
     <div class="top-credit">
@@ -306,18 +304,17 @@
     </div>
 
     <script>
-        // Aro 8-ta notun Bengali Wishes ✍️
         const poemsArray = [
-            "বসন্তের ছোঁয়ায় রঙিন হোক তোমার মন,<br> <span class='bengali-name'>{name}</span>-তোমার জীবনে আসুক খুশির প্লাবন।",
-            "ফাগুনের রঙে রাঙা হোক তোমার আকাশ,<br> <span class='bengali-name'>{name}</span>-তোমার মুখে ফুটুক মিষ্টি হাসির বাতাস।",
-            "আবিরের ছোঁয়ায় কাটুক সব বিষাদ,<br> <span class='bengali-name'>{name}</span>-তোমার জীবনে আসুক নতুন এক প্রভাত।",
-            "রঙিন সব আবিরেতে মাখাবো আজ তোমায়,<br> <span class='bengali-name'>{name}</span>-সুখ আর শান্তিতে ভরে উঠুক তোমার ধরায়।",
-            "পলাশ ফুলা ফাগুনে আজ লাগলো যে দোল,<br> <span class='bengali-name'>{name}</span>-রঙের বন্যায় ভাসিয়ে দাও সব গণ্ডগোল।",
-            "রামধনুর রঙের মতো রঙিন তোমার হাসি,<br> <span class='bengali-name'>{name}</span>-আনন্দে কাটুক তোমার দিন, জানাই রাশি রাশি।",
-            "হোলির রঙের এই মেলাতে মিশে যাক সব ব্যবধান,<br> <span class='bengali-name'>{name}</span>-তোমার প্রতিটি দিন হোক আলোয় আলোকময়।"
+            "ফাগুনের ছোঁয়ায় প্রকৃতি আজ সেজেছে নতুন সাজে,<br> <span class='bengali-name'>{name}</span>-তোমার মনের আনাচে কানাচে যেন হোলির রঙ বাজে।",
+            "পলাশ আর শিমুলের ডালে রঙের যে উৎসব,<br> <span class='bengali-name'>{name}</span>-তোমার জীবন ভরিয়ে দিক খুশির কলরব।",
+            "নীল আকাশে আবির উড়ে ছড়ায় রঙের খেলা,<br> <span class='bengali-name'>{name}</span>-বসন্তের এই হাওয়ায় কাটুক তোমার সারা বেলা।",
+            "প্রকৃতি আজ মেতেছে যে রঙের এক প্লাবনে,<br> <span class='bengali-name'>{name}</span>-তোমার মন রাঙুক আজ বসন্তেরই আগমনে।",
+            "গাছে গাছে কচি পাতা আর কোকিলের ওই গান,<br> <span class='bengali-name'>{name}</span>-হোলির রঙে রঙিন হোক তোমার পবিত্র প্রাণ।",
+            "রাঙা আবির মেখে আজ রাঙিয়ে দেবো ধরণী,<br> <span class='bengali-name'>{name}</span>-রঙের ভেলায় ভাসুক তোমার আগামী দিনের তরণী।",
+            "আকাশে ওড়ে সাতটি রঙ মাটির বুকে মেলা,<br> <span class='bengali-name'>{name}</span>-আনন্দে ভরে উঠুক তোমার হোলির এই খেলা।",
+            "ফাল্গুনের এই মাতাল হাওয়ায় দোল লেগেছে মনে,<br> <span class='bengali-name'>{name}</span>-শুভেচ্ছা জানাই তোমায় এই রঙিন ক্ষণে।"
         ];
 
-        // Aro 8-ta notun English Wishes (Stylish Font) 📜
         const englishWishesArray = [
             "Wishing you and your family a joyous and prosperous Festival of Colors.",
             "May the vibrant hues of Holi bring abundant success, peace, and harmony to your life.",
@@ -336,10 +333,19 @@
                 return;
             }
 
-            // Play background music (Violin & Saxophone)
+            // Fixed Audio Playback Code
             let bgMusic = document.getElementById('bgMusic');
             bgMusic.volume = 0.5; 
-            bgMusic.play().catch(e => console.log("Audio autoplay prevented by browser."));
+            
+            // Advanced promise handling for reliable mobile play
+            let playPromise = bgMusic.play();
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    console.log("Music started successfully");
+                }).catch(error => {
+                    console.log("Auto-play prevented by browser. Wait for further interaction.");
+                });
+            }
 
             document.getElementById('display-name').innerText = name;
             
@@ -361,7 +367,7 @@
                         setTimeout(() => {
                             img.classList.add('show'); 
                         }, 50); 
-                    }, 500); // Small pause before image appears
+                    }, 500); 
                 });
             });
         }
@@ -408,7 +414,6 @@
             }
         }
 
-        // Mobile Sensor for Tilt
         if (window.DeviceOrientationEvent) {
             window.addEventListener("deviceorientation", function(event) {
                 let x = event.gamma; 
@@ -445,7 +450,6 @@
             window.open(whatsappUrl, '_blank');
         }
 
-        // --- PARTICLE SYSTEM ---
         const canvas = document.getElementById('abir-canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
