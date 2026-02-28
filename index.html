@@ -271,8 +271,8 @@
 </head>
 <body>
 
-    <audio id="bgMusic" loop autoplay preload="auto">
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" type="audio/mpeg">
     </audio>
 
     <div class="top-credit">
@@ -304,117 +304,13 @@
     </div>
 
     <script>
-        // ==== SMART AUTO-PLAY HACK ====
-        // User jemon i screen e touch korbe (nam lekhar jonne), gaan automatic start hoye jabe
-        function forcePlayMusic() {
-            let bgMusic = document.getElementById('bgMusic');
+        // ==== 100% WORKING SMART AUDIO PLAY ====
+        const bgMusic = document.getElementById('bgMusic');
+        bgMusic.volume = 0.3; // Very soft and relaxing volume
+
+        function playMusic() {
             if (bgMusic.paused) {
-                bgMusic.volume = 0.5;
-                bgMusic.play().catch(e => console.log("Waiting for user..."));
-            }
-            // Ekbar beje uthle listener gulo remove kore dewa hobe jate bar bar trigger na hoy
-            document.body.removeEventListener('click', forcePlayMusic);
-            document.body.removeEventListener('touchstart', forcePlayMusic);
-            document.body.removeEventListener('keydown', forcePlayMusic);
-        }
-        
-        document.body.addEventListener('click', forcePlayMusic);
-        document.body.addEventListener('touchstart', forcePlayMusic);
-        document.body.addEventListener('keydown', forcePlayMusic);
-        // ==============================
-
-        const poemsArray = [
-            "ফাগুনের ছোঁয়ায় প্রকৃতি আজ সেজেছে নতুন সাজে,<br> <span class='bengali-name'>{name}</span>-তোমার মনের আনাচে কানাচে যেন হোলির রঙ বাজে।",
-            "পলাশ আর শিমুলের ডালে রঙের যে উৎসব,<br> <span class='bengali-name'>{name}</span>-তোমার জীবন ভরিয়ে দিক খুশির কলরব।",
-            "নীল আকাশে আবির উড়ে ছড়ায় রঙের খেলা,<br> <span class='bengali-name'>{name}</span>-বসন্তের এই হাওয়ায় কাটুক তোমার সারা বেলা।",
-            "প্রকৃতি আজ মেতেছে যে রঙের এক প্লাবনে,<br> <span class='bengali-name'>{name}</span>-তোমার মন রাঙুক আজ বসন্তেরই আগমনে।",
-            "গাছে গাছে কচি পাতা আর কোকিলের ওই গান,<br> <span class='bengali-name'>{name}</span>-হোলির রঙে রঙিন হোক তোমার পবিত্র প্রাণ।",
-            "রাঙা আবির মেখে আজ রাঙিয়ে দেবো ধরণী,<br> <span class='bengali-name'>{name}</span>-রঙের ভেলায় ভাসুক তোমার আগামী দিনের তরণী।",
-            "আকাশে ওড়ে সাতটি রঙ মাটির বুকে মেলা,<br> <span class='bengali-name'>{name}</span>-আনন্দে ভরে উঠুক তোমার হোলির এই খেলা।",
-            "ফাল্গুনের এই মাতাল হাওয়ায় দোল লেগেছে মনে,<br> <span class='bengali-name'>{name}</span>-শুভেচ্ছা জানাই তোমায় এই রঙিন ক্ষণে।"
-        ];
-
-        const englishWishesArray = [
-            "Wishing you and your family a joyous and prosperous Festival of Colors.",
-            "May the vibrant hues of Holi bring abundant success, peace, and harmony to your life.",
-            "Sending you my warmest regards. Have a wonderful and safe Holi.",
-            "May the colors of Holi paint the canvas of your life with laughter, happiness, and prosperity.",
-            "Let the colors of Holi sprinkle joy and bring new colors to your world.",
-            "Wishing you a Holi filled with sweet moments and colorful memories to cherish forever.",
-            "May this festival of colors dissolve all barriers and bring you endless moments of happiness.",
-            "May your life be as bright and colorful as the beautiful festival of Holi."
-        ];
-
-        function startMagic() {
-            let name = document.getElementById('userName').value;
-            if (name.trim() === "") {
-                alert("Please write your name here cutie! 🥰");
-                return;
-            }
-
-            // Button e click korle jodi age na beje thake tahole ekhon bajbe
-            forcePlayMusic();
-
-            document.getElementById('display-name').innerText = name;
-            
-            document.getElementById('intro-screen').style.display = 'none';
-            document.getElementById('main-screen').style.display = 'flex';
-
-            animationMode = 'burst';
-            createExplosion();
-
-            let randomPoem = poemsArray[Math.floor(Math.random() * poemsArray.length)].replace(/{name}/g, name);
-            typeWriterHTML(document.getElementById('poem-container'), randomPoem, 50, function() {
-                
-                let randomEnglish = englishWishesArray[Math.floor(Math.random() * englishWishesArray.length)];
-                animateEnglishText('english-wish-container', randomEnglish, function() {
-                    
-                    setTimeout(() => {
-                        let img = document.getElementById('holi-image');
-                        img.style.display = 'block'; 
-                        setTimeout(() => {
-                            img.classList.add('show'); 
-                        }, 50); 
-                    }, 500); 
-                });
-            });
-        }
-
-        function typeWriterHTML(element, htmlString, speed, callback) {
-            element.innerHTML = "";
-            let i = 0;
-            let isTag = false;
-            let text = "";
-            function type() {
-                if (i < htmlString.length) {
-                    let char = htmlString.charAt(i);
-                    text += char;
-                    element.innerHTML = text;
-                    if (char === '<') isTag = true;
-                    if (char === '>') isTag = false;
-                    i++;
-                    if (isTag) {
-                        type(); 
-                    } else {
-                        setTimeout(type, speed);
-                    }
-                } else if (callback) {
-                    setTimeout(callback, 500); 
-                }
-            }
-            type();
-        }
-
-        function animateEnglishText(elementId, text, callback) {
-            let container = document.getElementById(elementId);
-            container.innerHTML = "";
-            let words = text.split(" ");
-            words.forEach((word, index) => {
-                let span = document.createElement("span");
-                span.innerHTML = word + "&nbsp;";
-                span.style.animationDelay = `${index * 0.15}s`; 
-                container.appendChild(span);
-            });
-
-            if(callback) {
-                let totalTime = (words.length * 0.15 + 0.5) * 1000;
+                let promise = bgMusic.play();
+                if (promise !== undefined) {
+                    promise.then(_ => {
+                        // Success! Remove listeners so it doesn't
