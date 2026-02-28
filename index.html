@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Aesthetic Holi Wishes</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Galada&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
@@ -25,6 +25,7 @@
             background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             color: #ffffff;
             height: 100vh;
+            height: 100dvh; /* Better for mobile browsers */
             overflow: hidden;
             display: flex;
             justify-content: center;
@@ -32,24 +33,28 @@
             perspective: 1000px; 
         }
 
-        /* Top Corner Credit */
+        /* Top Center Credit */
         .top-credit {
             position: fixed;
             top: 15px;
-            right: 20px;
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.6);
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.85);
             letter-spacing: 1px;
             z-index: 100;
             font-family: 'Poppins', sans-serif;
+            text-align: center;
+            width: 100%;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
         }
         
         .top-credit span {
-            color: #ff007f;
+            color: #ffaa00;
             font-weight: 600;
             font-family: 'Dancing Script', cursive;
             font-size: 1.2rem;
-            letter-spacing: 0;
+            letter-spacing: 1px;
         }
 
         #abir-canvas {
@@ -61,6 +66,7 @@
             z-index: 0;
         }
 
+        /* Mobile Optimized Container */
         .container {
             position: relative;
             z-index: 10;
@@ -68,14 +74,25 @@
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             border: 1px solid var(--glass-border);
-            padding: 40px;
-            border-radius: 30px;
+            padding: 30px 20px;
+            border-radius: 25px;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
             text-align: center;
-            max-width: 650px;
-            width: 90%;
+            width: 92%;
+            max-width: 420px; /* Perfect for mobile ratio */
             transition: transform 0.2s ease-out, opacity 0.6s ease-in-out;
             transform-style: preserve-3d;
+        }
+
+        /* Laptop Adjustments */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 550px;
+                padding: 40px;
+                border-radius: 30px;
+            }
+            .top-credit { top: 20px; font-size: 0.9rem; }
+            .top-credit span { font-size: 1.4rem; }
         }
 
         @keyframes popIn {
@@ -85,12 +102,12 @@
 
         h1, h2 {
             font-family: 'Dancing Script', cursive;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
 
         #intro-screen h2 {
-            font-size: 3rem;
-            margin-bottom: 20px;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
             background: linear-gradient(45deg, #ff007f, #ffcc00);
             -webkit-background-clip: text;
             color: transparent;
@@ -98,15 +115,15 @@
 
         input[type="text"] {
             width: 100%;
-            padding: 15px 25px;
+            padding: 15px 20px;
             background: rgba(255, 255, 255, 0.1);
             border: 2px solid rgba(255, 255, 255, 0.2);
             border-radius: 50px;
             color: #fff;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-family: 'Poppins', sans-serif;
             outline: none;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             text-align: center;
             transition: border-color 0.3s, background 0.3s, transform 0.3s;
         }
@@ -118,7 +135,7 @@
         }
 
         .btn-magic {
-            padding: 12px 35px;
+            padding: 12px 30px;
             background: linear-gradient(45deg, #ff007f, #ffaa00);
             border: none;
             border-radius: 50px;
@@ -129,11 +146,12 @@
             cursor: pointer;
             box-shadow: 0 10px 20px rgba(255, 0, 127, 0.4);
             transition: transform 0.3s, box-shadow 0.3s;
-            margin: 5px;
+            width: 100%; /* Full width for mobile tap targets */
+            margin-bottom: 10px;
         }
 
         .btn-magic:hover {
-            transform: translateY(-3px) scale(1.05);
+            transform: translateY(-3px) scale(1.02);
             box-shadow: 0 15px 25px rgba(255, 170, 0, 0.5);
         }
 
@@ -146,54 +164,55 @@
             display: none;
             flex-direction: column;
             align-items: center;
-            height: 90vh;
+            height: auto;
+            max-height: 85vh;
             overflow-y: auto;
-            max-width: 800px;
             animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-top: 25px;
         }
 
-        #main-screen::-webkit-scrollbar { width: 6px; }
+        #main-screen::-webkit-scrollbar { width: 4px; }
         #main-screen::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 10px; }
 
         .wish-title {
-            font-size: 3.5rem;
+            font-size: 3rem;
             margin-bottom: 5px;
             background: linear-gradient(to right, #ff007f, #00f2fe, #4facfe, #ffaa00);
             -webkit-background-clip: text;
             color: transparent;
             animation: colorFlow 5s infinite linear;
+            line-height: 1.1;
         }
 
         .bengali-poem {
             font-family: 'Galada', cursive;
-            font-size: 1.8rem;
-            line-height: 1.6;
+            font-size: 1.4rem;
+            line-height: 1.5;
             color: #f1f1f1;
             margin: 15px 0;
-            padding: 15px;
+            padding: 12px;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
             border-radius: 15px;
             text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
-            min-height: 100px; 
+            min-height: 90px; 
         }
 
         .bengali-name {
             color: #ffaa00;
             font-family: 'Poppins', sans-serif;
             font-weight: 600;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
         }
 
-        /* STYLISH ENGLISH TEXT */
         .stylish-english {
             font-family: 'Dancing Script', cursive;
-            font-size: 2rem;
+            font-size: 1.6rem;
             color: #ffde00;
-            margin-bottom: 25px;
-            line-height: 1.5;
-            padding: 0 15px;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            padding: 0 10px;
             text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
-            min-height: 80px;
+            min-height: 70px;
         }
 
         .stylish-english span {
@@ -207,21 +226,19 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* MAIN IMAGE ANIMATION */
         #holi-image {
-            width: 80%;
-            max-width: 300px;
+            width: 85%;
+            max-width: 250px;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.6);
             margin-bottom: 20px;
             border: 3px solid rgba(255,255,255,0.2);
-            display: none; /* Hidden initially */
+            display: none; 
             opacity: 0;
             transform: scale(0.5);
             transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* Class added via JS to trigger animation */
         #holi-image.show {
             opacity: 1;
             transform: scale(1);
@@ -229,10 +246,10 @@
 
         .button-group {
             display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
+            flex-direction: column; /* Stacked for mobile */
+            gap: 10px;
+            width: 100%;
+            margin-bottom: 15px;
         }
 
         @keyframes colorFlow {
@@ -240,12 +257,12 @@
             100% { filter: hue-rotate(360deg); }
         }
 
-        @media (max-width: 600px) {
-            #intro-screen h2 { font-size: 2.2rem; }
-            .wish-title { font-size: 2.8rem; }
-            .bengali-poem { font-size: 1.4rem; }
-            .stylish-english { font-size: 1.6rem; }
-            .top-credit { font-size: 0.75rem; top: 10px; right: 10px; }
+        /* Adjustments for extremely small phones (like iPhone SE) */
+        @media (max-width: 360px) {
+            .wish-title { font-size: 2.5rem; }
+            .bengali-poem { font-size: 1.2rem; }
+            .stylish-english { font-size: 1.4rem; }
+            .container { padding: 25px 15px; }
         }
     </style>
 </head>
@@ -256,14 +273,14 @@
     </audio>
 
     <div class="top-credit">
-        This Page is made by - <span>Soumik De.</span>
+        This Page is Made By- <span>Soumik De</span>
     </div>
 
     <canvas id="abir-canvas"></canvas>
 
     <div class="container" id="intro-screen">
         <h2>Enter Your Name</h2>
-        <p style="margin-bottom: 20px; color: #ccc; font-weight: 300;">Let the colors welcome you...</p>
+        <p style="margin-bottom: 20px; color: #ccc; font-weight: 300; font-size: 0.9rem;">Let the colors welcome you...</p>
         <input type="text" id="userName" placeholder="Your beautiful name here..." autocomplete="off">
         <button class="btn-magic" onclick="startMagic()">See Magic</button>
     </div>
@@ -303,9 +320,8 @@
                 return;
             }
 
-            // Play background music when user interacts
             let bgMusic = document.getElementById('bgMusic');
-            bgMusic.volume = 0.5; // Soft volume
+            bgMusic.volume = 0.5; 
             bgMusic.play().catch(e => console.log("Audio autoplay prevented by browser."));
 
             document.getElementById('display-name').innerText = name;
@@ -313,31 +329,26 @@
             document.getElementById('intro-screen').style.display = 'none';
             document.getElementById('main-screen').style.display = 'flex';
 
-            // Start Particle Burst
             animationMode = 'burst';
             createExplosion();
 
-            // STEP 1: TYPEWRITER EFFECT FOR BENGALI
             let randomPoem = poemsArray[Math.floor(Math.random() * poemsArray.length)].replace(/{name}/g, name);
             typeWriterHTML(document.getElementById('poem-container'), randomPoem, 50, function() {
                 
-                // STEP 2: FADE-IN LINE BY LINE FOR ENGLISH AFTER BENGALI FINISHES
                 let randomEnglish = englishWishesArray[Math.floor(Math.random() * englishWishesArray.length)];
                 animateEnglishText('english-wish-container', randomEnglish, function() {
                     
-                    // STEP 3: SHOW IMAGE WITH ANIMATION AFTER ENGLISH FINISHES
                     setTimeout(() => {
                         let img = document.getElementById('holi-image');
-                        img.style.display = 'block'; // Make it take up space
+                        img.style.display = 'block'; 
                         setTimeout(() => {
-                            img.classList.add('show'); // Trigger CSS transition
-                        }, 50); // Small delay to allow browser to register display:block
-                    }, 400); // 400ms pause before showing image
+                            img.classList.add('show'); 
+                        }, 50); 
+                    }, 400); 
                 });
             });
         }
 
-        // HTML-aware Typewriter Function
         function typeWriterHTML(element, htmlString, speed, callback) {
             element.innerHTML = "";
             let i = 0;
@@ -352,18 +363,17 @@
                     if (char === '>') isTag = false;
                     i++;
                     if (isTag) {
-                        type(); // Instant type for HTML tags
+                        type(); 
                     } else {
                         setTimeout(type, speed);
                     }
                 } else if (callback) {
-                    setTimeout(callback, 500); // Wait a bit before starting english
+                    setTimeout(callback, 500); 
                 }
             }
             type();
         }
 
-        // Word-by-Word Smooth Fade In Function with Callback
         function animateEnglishText(elementId, text, callback) {
             let container = document.getElementById(elementId);
             container.innerHTML = "";
@@ -371,18 +381,17 @@
             words.forEach((word, index) => {
                 let span = document.createElement("span");
                 span.innerHTML = word + "&nbsp;";
-                span.style.animationDelay = `${index * 0.15}s`; // Delay for each word
+                span.style.animationDelay = `${index * 0.15}s`; 
                 container.appendChild(span);
             });
 
-            // Trigger callback when the last word finishes animating
             if(callback) {
                 let totalTime = (words.length * 0.15 + 0.5) * 1000;
                 setTimeout(callback, totalTime);
             }
         }
 
-        // --- DEVICE SENSOR (GYROSCOPE) FOR MOBILE TILT EFFECT ---
+        // Reduced Tilt effect for mobile to prevent jitter
         if (window.DeviceOrientationEvent) {
             window.addEventListener("deviceorientation", function(event) {
                 let x = event.gamma; 
@@ -390,18 +399,17 @@
 
                 if (x === null || y === null) return; 
 
-                if (x > 30) x = 30; if (x < -30) x = -30;
-                if (y > 30) y = 30; if (y < -30) y = -30;
+                if (x > 20) x = 20; if (x < -20) x = -20;
+                if (y > 20) y = 20; if (y < -20) y = -20;
 
                 document.querySelectorAll('.container').forEach(card => {
                     if(card.style.display !== 'none') {
-                        card.style.transform = `rotateY(${x / 1.5}deg) rotateX(${-y / 1.5}deg)`;
+                        card.style.transform = `rotateY(${x / 2}deg) rotateX(${-y / 2}deg)`;
                     }
                 });
             });
         }
 
-        // Desktop Mouse Tilt Fallback
         document.addEventListener('mousemove', (e) => {
             document.querySelectorAll('.container').forEach(card => {
                 if(card.style.display !== 'none') {
@@ -420,7 +428,6 @@
             window.open(whatsappUrl, '_blank');
         }
 
-        // --- PARTICLE SYSTEM ---
         const canvas = document.getElementById('abir-canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -496,15 +503,15 @@
             let centerX = canvas.width / 2;
             let centerY = canvas.height / 2;
             
-            for (let i = 0; i < 250; i++) {
+            for (let i = 0; i < 200; i++) {
                 particles.push(new Particle(centerX, centerY, 'burst'));
             }
 
             setTimeout(() => {
                 animationMode = 'raining';
                 particles = particles.filter(p => p.mode !== 'floating');
-                if(particles.filter(p => p.mode === 'raining').length < 150) {
-                    for (let i = 0; i < 150; i++) {
+                if(particles.filter(p => p.mode === 'raining').length < 100) {
+                    for (let i = 0; i < 100; i++) {
                         particles.push(new Particle(Math.random() * canvas.width, -10, 'raining'));
                     }
                 }
@@ -512,14 +519,14 @@
         }
 
         canvas.addEventListener('click', (e) => {
-            for (let i = 0; i < 40; i++) {
+            for (let i = 0; i < 30; i++) {
                 particles.push(new Particle(e.clientX, e.clientY, 'clickBurst'));
             }
         });
 
         document.body.addEventListener('click', (e) => {
             if(e.target.tagName !== 'BUTTON' && e.target.tagName !== 'INPUT' && e.target.tagName !== 'IMG') {
-                for (let i = 0; i < 40; i++) {
+                for (let i = 0; i < 30; i++) {
                     particles.push(new Particle(e.clientX, e.clientY, 'clickBurst'));
                 }
             }
